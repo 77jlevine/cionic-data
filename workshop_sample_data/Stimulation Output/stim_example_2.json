@@ -1,0 +1,319 @@
+{
+    "app_xid": "UAUIIdfu3ZoDUb6L-OpfrSNciakTf_d5Bnro3xj3K0s",
+    "setup": {
+        "program_type": 1,
+        "rig": "skeletal",
+        "splashImage": "https://app.cionic.com/media/bbce5cde-8ba7-4877-8304-21b99114d87f/gaitassist@3x.png",
+        "interfaceSplashImage": "https://app.cionic.com/media/ee1252ab-68a8-4c62-8c39-2661728dc4ce/gaitassist@3x.png",
+        "historyIcon": "https://app.cionic.com/media/6f8af303-3237-4c4a-9bae-a8709caccf99/Assist@3x.png",
+        "calibration": "imu",
+        "keep_awake": "true",
+        "reportUrls": [
+            {
+                "url": "https://raw.githubusercontent.com/cionicwear/cde/develop/analysis/gait.ipynb"
+            }
+        ],
+        "fes": [
+            {
+                "name": "main",
+                "zone": "left",
+                "split": "split",
+                "algorithms": [
+                    {
+                        "name": "split",
+                        "kind": "peak",
+                        "stream": "l_shank",
+                        "component": "x"
+                    },
+                    {
+                        "name": "ZeroCrossPMShankX_28",
+                        "kind": "cross-",
+                        "stream": "l_shank",
+                        "component": "x",
+                        "threshold": 0,
+                        "default_peak": 25,
+                        "default_trough": -35
+                    },
+                    {
+                        "name": "TroughThighX_57",
+                        "kind": "trough",
+                        "stream": "l_thigh",
+                        "component": "x",
+                        "default_peak": 25,
+                        "default_trough": -35
+                    },
+                    {
+                        "name": "ZeroCrossMPThighX_68",
+                        "kind": "cross+",
+                        "stream": "l_thigh",
+                        "component": "x",
+                        "threshold": 0,
+                        "default_peak": 25,
+                        "default_trough": -35
+                    },
+                    {
+                        "name": "TroughShankX_73",
+                        "kind": "trough",
+                        "stream": "l_shank",
+                        "component": "x",
+                        "default_peak": 25,
+                        "default_trough": -35
+                    },
+                    {
+                        "name": "ZeroCrossMPShankX_91",
+                        "kind": "cross+",
+                        "stream": "l_shank",
+                        "component": "x",
+                        "threshold": 0,
+                        "default_peak": 25,
+                        "default_trough": -35
+                    }
+                ],
+                "triggers": [
+                    {
+                        "name": "hl1",
+                        "muscle": "custom4",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "TroughShankX_73",
+                            "intensityPercent": 100,
+                            "delay": 11,
+                            "ramp": 9,
+                            "duration": 4,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "ZeroCrossMPShankX_91",
+                            "delay": 6,
+                            "ramp": 23,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "hm1",
+                        "muscle": "custom5",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "TroughShankX_73",
+                            "intensityPercent": 100,
+                            "delay": 11,
+                            "ramp": 9,
+                            "duration": 4,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "ZeroCrossMPShankX_91",
+                            "delay": 6,
+                            "ramp": 23,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "vl1",
+                        "muscle": "custom7",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "ZeroCrossMPShankX_91",
+                            "intensityPercent": 100,
+                            "delay": 2,
+                            "ramp": 14,
+                            "duration": 4,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "split",
+                            "delay": 11,
+                            "ramp": 20,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "rf1",
+                        "muscle": "custom6",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "ZeroCrossMPShankX_91",
+                            "intensityPercent": 100,
+                            "delay": 2,
+                            "ramp": 13,
+                            "duration": 5,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "split",
+                            "delay": 11,
+                            "ramp": 18,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "gl1",
+                        "muscle": "custom2",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "split",
+                            "intensityPercent": 100,
+                            "delay": 9,
+                            "ramp": 33,
+                            "duration": 5,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "ZeroCrossPMShankX_28",
+                            "delay": 19,
+                            "ramp": 10,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "gm1",
+                        "muscle": "custom3",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "split",
+                            "intensityPercent": 100,
+                            "delay": 9,
+                            "ramp": 33,
+                            "duration": 5,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "ZeroCrossPMShankX_28",
+                            "delay": 19,
+                            "ramp": 10,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "ta1",
+                        "muscle": "custom1",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "ZeroCrossMPShankX_91",
+                            "intensityPercent": 100,
+                            "delay": 2,
+                            "ramp": 8,
+                            "duration": 4,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "split",
+                            "delay": 5,
+                            "ramp": 7,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    },
+                    {
+                        "name": "ta2",
+                        "muscle": "custom1",
+                        "cycle": 1,
+                        "default_cycle": 2000,
+                        "contract": {
+                            "algo": "TroughThighX_57",
+                            "intensityPercent": 28,
+                            "delay": 6,
+                            "ramp": 7,
+                            "duration": 5,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        },
+                        "relax": {
+                            "algo": "TroughShankX_73",
+                            "delay": 2,
+                            "ramp": 8,
+                            "context": "\" stim\" RELAY! 0 50 1"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "phases": [
+        {
+            "title": "warmup",
+            "cmd": "\" stim\" RELAY!",
+            "repeat": 1,
+            "type": "sequence",
+            "segments": [
+                {
+                    "label": "warmup",
+                    "actions": [
+                        {
+                            "instruction": "Press > when ready to begin the protocol",
+                            "completion": {
+                                "type": "man",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "no_stim",
+            "cmd": "\" stim\" RELAYOFF",
+            "repeat": 1,
+            "type": "sequence",
+            "segments": [
+                {
+                    "label": "no_stim",
+                    "actions": [
+                        {
+                            "instruction": "Warmup at SSV without stim. Press to begin stim",
+                            "completion": {
+                                "type": "man",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "stim_active",
+            "cmd": "\" stim\" RELAYON",
+            "repeat": 1,
+            "type": "sequence",
+            "segments": [
+                {
+                    "label": "stim_active",
+                    "actions": [
+                        {
+                            "instruction": "Walk with stim. Press to begin cooldown",
+                            "completion": {
+                                "type": "man",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "cooldown",
+            "cmd": "\" stim\" RELAYOFF",
+            "repeat": 1,
+            "type": "sequence",
+            "segments": [
+                {
+                    "label": "cooldown",
+                    "actions": [
+                        {
+                            "instruction": "cooldown at SSV. Press to finish",
+                            "completion": {
+                                "type": "man",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
