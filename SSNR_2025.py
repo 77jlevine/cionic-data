@@ -145,7 +145,7 @@ muscle_ids = {
     'vl': "custom7",
     'rf': "custom6",
     'gl': "custom2",
-    'gm': "custom3", # was glute med before
+    'gm': "custom3", 
     'ta': "custom1",
     
 }
@@ -203,6 +203,7 @@ if col_names[1][0].lower() == 'r':
 else:
     side = 'Left'
 
+print(side)
 # Only allow acceptable muscle names
 # muscle_name_set = ['hl','hm','vl','rf','gl','gm','ta']
 
