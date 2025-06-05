@@ -9,7 +9,6 @@ __pycache__/
 # auth changes
 run_auth.py
 
-
 # Distribution / packaging
 .Python
 build/

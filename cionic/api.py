@@ -159,21 +159,21 @@ ROLE_REM_RESPONSE = {
     404 : 'Not Granted',
 }
 
-def add_roles(orgid, xid, roles):
-    for role in roles:
-        if rid := ORG_ROLES.get(role):
-            status = post_cionic(f'{orgid}/accounts/{xid}/roles', microservice='a', json={'role':rid}, ret_status=True)
-            print(f'Role {role} added <{ROLE_ADD_RESPONSE.get(status, status)}>')
-        else:
-            print(f'Role {role} unknown')
+# def add_roles(orgid, xid, roles):
+#     for role in roles:
+#         if rid := ORG_ROLES.get(role):
+#             status = post_cionic(f'{orgid}/accounts/{xid}/roles', microservice='a', json={'role':rid}, ret_status=True)
+#             print(f'Role {role} added <{ROLE_ADD_RESPONSE.get(status, status)}>')
+#         else:
+#             print(f'Role {role} unknown')
 
-def remove_roles(orgid, xid, roles):
-    for role in roles:
-        if rid := ORG_ROLES.get(role):
-            status = delete_cionic(f'{orgid}/accounts/{xid}/roles/{rid}', microservice='a', ret_status=True)
-            print(f'Role {role} removed <{ROLE_REM_RESPONSE.get(status, status)}>')
-        else:
-            print(f'Role {role} unknown')
+# def remove_roles(orgid, xid, roles):
+#     for role in roles:
+#         if rid := ORG_ROLES.get(role):
+#             status = delete_cionic(f'{orgid}/accounts/{xid}/roles/{rid}', microservice='a', ret_status=True)
+#             print(f'Role {role} removed <{ROLE_REM_RESPONSE.get(status, status)}>')
+#         else:
+#             print(f'Role {role} unknown')
 
 def to_jsonl(objs):
     'Return jsonl of list of dicts.'
@@ -362,34 +362,42 @@ def auth(tokenpath=None, domain=None):
     :return: list of the user's org shortnames
     """
     global server, authtoken
-    if tokenpath is None:
-        access_token = os.environ.get('CIONIC_ACCESS_TOKEN')
-        domain = os.environ.get('CIONIC_OAUTH_SERVER')
-        if (access_token is None) or (domain is None):
-            print('''
-CIONIC AUTH ERROR: No tokenpath specified and no CIONIC_ACCESS_TOKEN or CIONIC_OAUTH_SERVER in the environment.
-Please logout/login.
-''')
+    server = 'cionic.com'  #d['domain']
+    authtoken = "cTMGLre68ACewVyGZzdkAiZJUS-w5IYA96OFV-LoMPt3EYEmXuDahWkVZJ-KqqkW"
 
-        #
-        # GET the user's Cionic credentials from the OAuth API
-        #
-        ouser_resp = requests.get(f'https://{domain}/oauth/user', headers={'Authorization': f'Bearer {access_token}'})
-        if ouser_resp.status_code != http.client.OK:
-            print('''
-CIONIC AUTH ERROR: OAuth token failed. Please logout/login.
-            ''')
 
-        ouser = ouser_resp.json()
-        authtoken = ouser['atok']
-        server = domain
-        return ouser['orgs']
 
-    #
-    # tokenpath overrides the env var
-    #
-    with open(tokenpath) as tokfp:
-        d = json.loads(tokfp.read())
-        server = d['domain']
-        authtoken = d['token']
-        return d['orgs']
+
+
+    
+#     if tokenpath is None:
+#         access_token = os.environ.get('CIONIC_ACCESS_TOKEN')
+#         domain = os.environ.get('CIONIC_OAUTH_SERVER')
+#         if (access_token is None) or (domain is None):
+#             print('''
+# CIONIC AUTH ERROR: No tokenpath specified and no CIONIC_ACCESS_TOKEN or CIONIC_OAUTH_SERVER in the environment.
+# Please logout/login.
+# ''')
+
+#         #
+#         # GET the user's Cionic credentials from the OAuth API
+#         #
+#         ouser_resp = requests.get(f'https://{domain}/oauth/user', headers={'Authorization': f'Bearer {access_token}'})
+#         if ouser_resp.status_code != http.client.OK:
+#             print('''
+# CIONIC AUTH ERROR: OAuth token failed. Please logout/login.
+#             ''')
+
+#         ouser = ouser_resp.json()
+#         authtoken = ouser['atok']
+#         server = domain
+#         return ouser['orgs']
+
+#     #
+#     # tokenpath overrides the env var
+#     #
+#     with open(tokenpath) as tokfp:
+#         d = json.loads(tokfp.read())
+#         server = d['domain']
+#         authtoken = d['token']
+#         return d['orgs']
