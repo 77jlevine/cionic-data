@@ -1,26 +1,22 @@
 # %%
+# This file will extract EMG and shank sagittal IMU data from the .npz file downloaded from 
+# www.cionic.com/a into a .csv file. You can download the files from the Participants or Collections tab on the 
+# dashboard. Please do not save these files directly into the repository. 
+
 import numpy as np
 import pandas as pd
-from cionic import tools, triggers
-import matplotlib.pyplot as plt
+from cionic import tools
 from scipy.interpolate import interp1d
-from scipy.signal import find_peaks
-import tkinter as tk
-from tkinter import filedialog
-import json
 
 # %%
-# Select file
+# Select a .npz file downloaded from the Cionic website. 
+# Please save in an external location outside of this repository.
+# This is where the extracted EMG file will be saved.
 
-# Hide the root window
-root = tk.Tk()
-root.withdraw()
+file_path = '' 
+file_name = '.npz' # should end with .npz
 
-# Open the file dialog
-file_path_emg = filedialog.askopenfilename(
-    title="Select a .npz file",
-    filetypes=[("NumPy compressed", "*.npz"), ("All files", "*.*")]
-)
+file_path_emg = file_path + file_name
 
 
 npz = np.load(file_path_emg)

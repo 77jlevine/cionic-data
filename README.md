@@ -1,7 +1,14 @@
 # CIONIC Data Tools
 
 
-This is a modified repository from CIONIC for the Summer School on Neurorehabilitation 2025. 
+This is a modified repository from CIONIC for the Summer School on Neurorehabilitation 2025. These are the requirements: 
+
+numpy==1.23.4
+requests==2.32.3
+pandas==1.5.1
+scipy==1.9.3
+matplotlib==3.7.1
+
 
 The three days of the workshop will use this repository as well as the web interface. You can access the web interface by going to www.cionic.com/a. Type in the email that you provided for the conference and press enter. You should receive an email with a link from CIONIC, which will transfer you to the CIONIC dashboard, where you should see SSNR 2025. Click open. Then click open under SSNR 2025 Workshop. There should be 4 tabs on the lefthand side: 
 
@@ -25,9 +32,7 @@ On day 1, you will be recording EMG and IMU data during walking using the Cionic
 10. Restart the control unit on the app.
 11. After restarting, it should say Left- before the control unit. 
 12. On the main page, select Freeform. This is the EMG recording mode. 
-13. Select Start. This will initiate calibration. You will be asked to stand with feet shoulder width apart for 5 seconds. Then you will be asked to sit with your leg (wearing the sleeve) extended for 5 seconds. After that recording will start immediately. You can press stop to end the recording and 
-
-
+13. Select Start. This will initiate calibration. You will be asked to stand with feet shoulder width apart for 5 seconds. Then you will be asked to sit with your leg (wearing the sleeve) extended for 5 seconds. After that recording will start immediately. You can press stop to end the recording and delete the file. Restart once you are ready by selecting start. When completed, you can save the file with a unique identifier to help you find it. 
 
 
 There are two files that you will be using: 
